@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.newczl.ccjoke.R
 import com.newczl.libnavannotation.FragmentDestination
 
-@FragmentDestination(pageUrl = "main/tabs/dashboard")
+@FragmentDestination(pageUrl = "main/tabs/dashboard",asStart = true)
 class DashboardFragment : Fragment() {
 
     private lateinit var dashboardViewModel: DashboardViewModel

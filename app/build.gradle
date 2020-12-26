@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId "com.newczl.ccjoke"
-        minSdkVersion 29
+        minSdkVersion 21
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -52,4 +52,9 @@ dependencies {
 
     implementation project(':libnavannotation')
     kapt project(':libnavcompiler')
+    //json解析
+    implementation 'com.alibaba:fastjson:1.2.70'
+    implementation 'com.google.code.gson:gson:2.8.6'
+    //反射
+    implementation "org.jetbrains.kotlin:kotlin-reflect:$kotlin_version"
 }

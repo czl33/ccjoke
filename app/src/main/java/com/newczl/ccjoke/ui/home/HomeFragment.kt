@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.newczl.ccjoke.R
 import com.newczl.libnavannotation.FragmentDestination
 
-@FragmentDestination(pageUrl = "main/tabs/home",asStart = true)
+@FragmentDestination(pageUrl = "main/tabs/home")
 class HomeFragment : Fragment() {
 
     private lateinit var homeViewModel: HomeViewModel

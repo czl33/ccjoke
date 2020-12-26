@@ -8,7 +8,6 @@ import com.newczl.libnavannotation.FragmentDestination
 import java.io.File
 import java.io.FileOutputStream
 import java.io.OutputStreamWriter
-import java.util.logging.Logger
 import javax.annotation.processing.*
 import javax.lang.model.SourceVersion
 import javax.lang.model.element.Element
@@ -16,7 +15,11 @@ import javax.lang.model.element.TypeElement
 import javax.tools.Diagnostic
 import javax.tools.StandardLocation
 import kotlin.math.abs
-
+/**
+* NavProcessor.kt 类：注解处理器，生成导航栏文件文件
+* @author czl
+* created at 2020/12/26 9:09
+*/
 @AutoService(Processor::class)
 @SupportedSourceVersion(SourceVersion.RELEASE_8)
 @SupportedAnnotationTypes(
@@ -30,14 +33,14 @@ class NavProcessor : AbstractProcessor() {
         val OUTPUT_FILE_NAME = "destnation.json"
     }
 
-    private lateinit var messager: Messager;
-    private lateinit var files: Filer;
+    private lateinit var message: Messager
+    private lateinit var files: Filer
 
 
     override fun init(processingEnv: ProcessingEnvironment?) {
         super.init(processingEnv)
-        messager = processingEnv!!.messager;
-        files = processingEnv.filer;
+        message = processingEnv!!.messager
+        files = processingEnv.filer
     }
 
     override fun process(
@@ -59,8 +62,7 @@ class NavProcessor : AbstractProcessor() {
                 files.createResource(StandardLocation.CLASS_OUTPUT, "", OUTPUT_FILE_NAME)
             //文件路径
             val resourcePath = resource.toUri().path
-            messager.printMessage(Diagnostic.Kind.NOTE, "resourcePath: $resourcePath")
-
+            message.printMessage(Diagnostic.Kind.NOTE, "resourcePath: $resourcePath")
             //app路径
             val appPath = resourcePath.substring(0, resourcePath.indexOf("app") + 4)
             //assert路径
@@ -85,7 +87,9 @@ class NavProcessor : AbstractProcessor() {
         return true
     }
 
-    //处理注解
+    /**
+     * 处理注释
+     */
     private fun handleDestination(
         fragmentsAnnotatedWith: Set<Element>,
         java: Class<out Annotation>,
@@ -94,7 +98,7 @@ class NavProcessor : AbstractProcessor() {
         fragmentsAnnotatedWith.forEach {
             val typeElement = it as TypeElement
             val className = typeElement.qualifiedName.toString()
-            var pageUrl = "";
+            var pageUrl = ""
             val id = abs(className.hashCode())
             var needLogin = false
             var asStarter = false
@@ -114,7 +118,7 @@ class NavProcessor : AbstractProcessor() {
                 }
             }
             if (destMap.containsKey(pageUrl)) {
-                messager.printMessage(Diagnostic.Kind.ERROR, "不同的页面不允许使用相同的PageUrl:$className")
+                message.printMessage(Diagnostic.Kind.ERROR, "不同的页面不允许使用相同的PageUrl:$className")
             } else {
                 val json = JSONObject()
                 json["id"] = id
