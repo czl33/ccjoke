@@ -1,4 +1,4 @@
-package com.newczl.ccjoke.ui.dashboard
+package com.newczl.ccjoke.ui.find
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,21 +11,21 @@ import androidx.lifecycle.ViewModelProvider
 import com.newczl.ccjoke.R
 import com.newczl.libnavannotation.FragmentDestination
 
-@FragmentDestination(pageUrl = "main/tabs/dashboard",asStart = true)
-class DashboardFragment : Fragment() {
+@FragmentDestination(pageUrl = "main/tabs/find")
+class FindFragment : Fragment() {
 
-    private lateinit var dashboardViewModel: DashboardViewModel
+    private lateinit var findViewModel: FindViewModel
 
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        dashboardViewModel =
-                ViewModelProvider(this).get(DashboardViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_dashboard, container, false)
-        val textView: TextView = root.findViewById(R.id.text_dashboard)
-        dashboardViewModel.text.observe(viewLifecycleOwner, Observer {
+        findViewModel =
+                ViewModelProvider(this).get(FindViewModel::class.java)
+        val root = inflater.inflate(R.layout.fragment_find, container, false)
+        val textView: TextView = root.findViewById(R.id.text_notifications)
+        findViewModel.text.observe(viewLifecycleOwner, Observer {
             textView.text = it
         })
         return root
