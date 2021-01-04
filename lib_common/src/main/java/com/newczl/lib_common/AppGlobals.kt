@@ -1,4 +1,4 @@
-package com.newczl.ccjoke.utils
+package com.newczl.lib_common
 
 import android.annotation.SuppressLint
 import android.app.Application

@@ -31,22 +31,19 @@ class AppBottomBar : BottomNavigationView {
             R.drawable.icon_tab_find,
             R.drawable.icon_tab_mine
         )
-
     }
 
-    constructor(context: Context) : super(context) {
+    constructor(context: Context) : super(context)
 
-    }
+    constructor(context: Context, attributeSet: AttributeSet) : super(context, attributeSet)
 
-    constructor(context: Context, attributeSet: AttributeSet) : super(context, attributeSet) {
-
-    }
+    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 
     init {
         val bottomBar = AppConfig.sBottomBar
         bottomBar?.apply {
             val tabs = tabs
-            val states = JsonUtils.getArray()
+            val states = JsonUtils.array
             val colors = intArrayOf(
                 Color.parseColor(activeColor),
                 Color.parseColor(inActiveColor)
@@ -100,13 +97,7 @@ class AppBottomBar : BottomNavigationView {
         }
     }
 
-
-    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) :
-            super(context, attrs, defStyleAttr) {
-
-    }
-
-    private fun getId(pageUrl: String): Int {
+    private fun getId(pageUrl: String):Int{
         val destination = AppConfig.sDestConfig?.get(pageUrl) ?: return -1
         return destination.id
     }

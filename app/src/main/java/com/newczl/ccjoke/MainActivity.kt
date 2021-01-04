@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.MenuItem
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -23,8 +24,10 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        val fragment = supportFragmentManager.findFragmentById(R.id.navFragment)
+
         NavigationUI.setupWithNavController(bottomBar,navController)
-        NavGraphBuilder.build(navController)
+        NavGraphBuilder.build(navController,this,fragment!!.id)
         bottomBar.setOnNavigationItemSelectedListener(this)
     }
 
